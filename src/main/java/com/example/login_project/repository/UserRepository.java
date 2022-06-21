@@ -7,10 +7,13 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.Optional;
 
-public interface userRepo extends JpaRepository<User,Long> {
+public interface UserRepository extends JpaRepository<User,Long> {
     boolean existsByLogin(String login);
 
-    @Query(value = "SELECT password FROM User WHERE login =:log ;",nativeQuery = true)
+    @Query(value = "SELECT password FROM Users WHERE login =:log ;",nativeQuery = true)
     String passByLogin(@Param("log") String login);
+
+    @Query(value = "SELECT id FROM Users WHERE login =:log ;",nativeQuery = true)
+    int idByLogin(@Param("log") String login);
 
 }
