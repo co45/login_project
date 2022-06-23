@@ -23,16 +23,15 @@ class LoginProjectApplicationTests {
 	private LoginService service;
 
 	@MockBean
-	private UserRepository repository;
+	private UserRepository rep;
 
 
 	@Test
 	public void getUserbyLoginTest() {
-		String login = "test";
+
 		Long id = Long.valueOf(1);
-		when(repository.existsByLogin(login))
-				.thenReturn(true);
-		assertEquals(1, service.idByUser(login));
+		assertEquals("test", service.idByUser("test"));
+		assertEquals(id,service.idByUser("test"));
 	}
 
 }
