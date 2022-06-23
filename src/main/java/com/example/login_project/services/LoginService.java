@@ -12,19 +12,8 @@ public class LoginService {
     private UserRepository user_r;
 
     public boolean signIn(User user) {
-
-        boolean test;
-        String pwd = "";
-
-        test = user_r.existsByLogin(user.getLogin());
-        pwd = user_r.passByLogin(user.getLogin());
-
-        if (test && pwd.matches(user.getPassword())) {
-            return true;
-        } else {
-            return false;
-        }
-
+        String pwd = user_r.getPasswordByLogin(user.getLogin());
+        return pwd!=null && pwd.matches(user.getPassword()) ;
     }
 
     public int idByUser(String login){

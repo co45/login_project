@@ -17,13 +17,13 @@ import javax.validation.Valid;
 public class LoginController {
 
     @Autowired
-    private LoginService login_s;
+    private LoginService loginService;
 
     @PostMapping("/login")
     public ResponseEntity<?> userAuthentication(@Valid @RequestBody User user) {
 
-        if (login_s.signIn(user)) {
-            user.setId(Long.valueOf(login_s.idByUser(user.getLogin())));
+        if (loginService.signIn(user)) {
+            user.setId(Long.valueOf(loginService.idByUser(user.getLogin())));
             return  ResponseEntity.ok().body(user);
         } else {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
